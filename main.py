@@ -7,23 +7,27 @@
 import random
 
 def f( lstName, n ):
-    if n <= len( lstName ):
-        lst = random.sample( lstName, n  )
+    if len( lstName ) > 0:
+        if n <= len( lstName ):
+            lst = random.sample( lstName, n  )
+        else:
+            lst = []
+            if len(lstName) <= 2:
+                step=1
+            elif len(lstName) <= 6:
+                step = 3
+            else:
+                step = 5
+
+            for i in range( 0, n//step ):
+                lst += random.sample(lstName, step )
+                #print( len(lst) )
+            if n%step > 0:
+                lst += random.sample( lstName, n%len(lstName)  )
+                #print(len(lst))
     else:
         lst = []
-        if len(lstName) <= 2:
-            step=1
-        elif len(lstName) <= 6:
-            step = 3
-        else:
-            step = 5
 
-        for i in range( 0, n//step ):
-            lst += random.sample(lstName, step )
-            #print( len(lst) )
-        if n%step > 0:
-            lst += random.sample( lstName, n%len(lstName)  )
-            #print(len(lst))
     return lst
 
 def fMax( lst ):
@@ -82,11 +86,11 @@ def rareType( inLst ):
 lst = ['Ия','Аполлинарий','Ян','Алексей','Валентина','Мирослава','Екатерина','Микеланджело','Александрина','Лидия','Полина','Габриэль','Гарри','Шарик','Валерий','Александр','Мурзик','Терминатор','Паша','Маша']
 
 # список из случайных заданных имен
-lst100 = f( lst, 100 )
+lst100 = f( [], 100 )
 
 #print(    lst   )
 #print(    lst100   )
 
-fMax( lst100 )
+#fMax( lst100 )
 
-rareType( lst100 )
+#rareType( lst100 )
